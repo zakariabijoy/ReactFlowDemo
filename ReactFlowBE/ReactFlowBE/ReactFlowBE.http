@@ -1,0 +1,6 @@
+@ReactFlowBE_HostAddress = http://localhost:5213
+
+GET {{ReactFlowBE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
