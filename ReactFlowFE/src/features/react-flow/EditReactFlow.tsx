@@ -148,7 +148,7 @@ export default function EditReactFlow(){
     if(target?.type==='defaultNode'){
       let lastChar = outputValue.slice(-1); 
       let targetValue='';
-      if(lastChar === '+' || '-'){
+      if(lastChar === '+' || '-' || '/' || '*'){
         targetValue = outputValue.substring(0, outputValue.length - 1);
         setOutputvalue(targetValue);
       }

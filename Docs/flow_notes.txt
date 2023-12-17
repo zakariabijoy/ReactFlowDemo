@@ -1,0 +1,110 @@
+Node1:
+	id: 001
+	type: input
+	lebel: Input4
+	value: chillerpump2power
+	source: [] 
+	taget: []
+	sourceNodes: []
+	tagetNodes: [003]
+	expr: ''
+
+Node2:
+	id: 002
+	type: input
+	lebel: Input4
+	value: condenserpump2power
+	sourceNodes: []
+	tagetNodes: [003]
+	expr: ''
+
+Node3:
+	id: 003
+	type: operator
+	lebel: -
+	value: -
+	sourceNodes: [001, 002]
+	tagetNodes: [005]
+	actualExpr: '( chillerpump2power - condenserpump2power )'
+	displayExpr: '( chillerpump2power - condenserpump2power )'
+
+Node4:
+	id: 004
+	type: computed
+	lebel: totalPower
+	value: chillerpump2power - condenserpump2power
+	sourceNodes: [004, 007, 005, 008]
+	tagetNodes: []
+	expr: '( chillerpump2power - condenserpump2power )'
+
+Node5:
+	id: 005
+	type: operator
+	lebel: /
+	value: /
+	sourceNodes: [004]
+	tagetNodes: []
+	expr: '( chillerpump2power - condenserpump2power )'
+
+
+
+
+dict<key, value>
+	<'001': ('chillerpump2power')>
+	<'002': ('condenserpump2power')>
+	<'003': ('( chillerpump2power - condenserpump2power )', sourceNodes: [001, 002])>
+	<'004': ('( chillerpump2power - condenserpump2power )', sourceNodes: [003])>
+	<'005': ('( chillerpump2power - condenserpump2power ) / ( chillerpump2power * condenserpump2power )', sourceNodes: [004])>
+
+
+
+
+Actions:
+	step 1:
+		001-->003
+		source: 001
+		target: 003
+
+		update: 
+			target node: 003
+				id: 003
+				type: operator
+				label: -
+				value: chillerpump2power
+
+	step 2:
+		002-->003
+		source: 002
+		target: 003
+
+		update: 
+			target node: 003
+				id: 003
+				type: operator
+				label: -
+				value: chillerpump2power - condenserpump2power
+
+	step 3:
+		002-->003
+		source: 002
+		target: 003
+
+		update: 
+			target node: 003
+				id: 003
+				type: operator
+				label: -
+				value: chillerpump2power - condenserpump2power
+
+
+
+
+
+
+
+
+if(previousExpr is empty)
+	sourceNode.Value
+
+
+previousExpr + targetNode.value + sourceNode.Value
